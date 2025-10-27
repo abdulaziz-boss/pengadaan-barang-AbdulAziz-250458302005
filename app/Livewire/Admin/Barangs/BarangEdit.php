@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Livewire\Admin\Barangs;
+
+use Livewire\Component;
+
+class BarangEdit extends Component
+{
+    public function render()
+    {
+        return view('livewire.admin.barangs.barang-edit');
+    }
+}
