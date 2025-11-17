@@ -13,9 +13,10 @@
 
     @stack('css')
     @livewireStyles
+
 </head>
 
-<body >
+<body>
 
     <div id="app">
         <livewire:atom.sidebar />

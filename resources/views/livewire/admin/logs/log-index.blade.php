@@ -22,10 +22,10 @@
                 </div>
             @else
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover align-middle">
-                        <thead class="table-light">
+                    <table class="table table-hover align-middle">
+                        <thead class="table bg-primary">
                             <tr>
-                                <th width="50">#</th>
+                                <th width="50">No</th>
                                 <th>Tabel</th>
                                 <th>Aksi</th>
                                 <th>Deskripsi</th>
@@ -98,4 +98,10 @@
             });
         });
     </script>
+    <style>
+        thead.bg-primary th {
+            color: #fff !important;
+        }
+
+    </style>
 </div>

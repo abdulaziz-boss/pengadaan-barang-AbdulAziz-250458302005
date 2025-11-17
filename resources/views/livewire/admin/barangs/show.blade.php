@@ -21,7 +21,7 @@
                 {{-- Informasi Utama --}}
                 <div class="col-md-6">
                     <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
+                        <div class="card-header bg-light">
                             <h5 class="card-title mb-0">Informasi Barang</h5>
                         </div>
                         <div class="card-body">
@@ -60,7 +60,7 @@
                 {{-- Informasi Stok --}}
                 <div class="col-md-6">
                     <div class="card mb-4">
-                        <div class="card-header bg-info text-white">
+                        <div class="card-header bg-light">
                             <h5 class="card-title mb-0">Informasi Stok</h5>
                         </div>
                         <div class="card-body">

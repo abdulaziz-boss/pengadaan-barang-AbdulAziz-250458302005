@@ -7,7 +7,7 @@
 
                         <h4 class="fw-bold mb-3">Edit Profil</h4>
 
-                        <form wire:submit.prevent="save">
+                        <form wire:submit.prevent="updateProfile">
                             <!-- Data Profil -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Lengkap</label>
@@ -59,14 +59,14 @@
                             <!-- Tombol Aksi -->
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-                                <span wire:loading.remove>
-                                    <i class="bi bi-save"></i> Simpan Perubahan
-                                </span>
-                                <span wire:loading>
-                                    <i class="bi bi-hourglass-split"></i> Menyimpan...
-                                </span>
-                            </button>
-                                <a href="{{ route('admin.profile.index') }}" wire:navigate class="btn btn-secondary"wire:navigate>
+                                    <span wire:loading.remove>
+                                        <i class="bi bi-save"></i> Simpan Perubahan
+                                    </span>
+                                    <span wire:loading>
+                                        <i class="bi bi-hourglass-split"></i> Menyimpan...
+                                    </span>
+                                </button>
+                                <a href="{{ route('staff.profile.index') }}" wire:navigate class="btn btn-secondary"wire:navigate>
                                     <i class="bi bi-arrow-left"></i> Kembali
                                 </a>
                             </div>

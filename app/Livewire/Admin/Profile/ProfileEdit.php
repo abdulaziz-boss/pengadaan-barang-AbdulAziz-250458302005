@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileEdit extends Component
 {
@@ -26,7 +27,7 @@ class ProfileEdit extends Component
 
     public function save()
     {
-        // Validasi untuk data profil
+        // Validasi input
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -36,13 +37,20 @@ class ProfileEdit extends Component
 
         $user = Auth::user();
 
-        // Update avatar jika ada
+        // Jika user upload avatar baru
         if ($this->avatar) {
+
+            // Hapus avatar lama (jika ada dan bukan default)
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            // Simpan avatar baru
             $path = $this->avatar->store('avatars', 'public');
             $user->avatar = $path;
         }
 
-        // Update data profil
+        // Update data profil lainnya
         $user->name = $this->name;
         $user->email = $this->email;
 
@@ -53,10 +61,10 @@ class ProfileEdit extends Component
 
         $user->save();
 
-        // Reset field password
+        // Reset field password agar kosong lagi di form
         $this->reset(['password', 'password_confirmation']);
 
-        // Kirim event untuk SweetAlert dan redirect
+        // Kirim event ke SweetAlert dan redirect
         $this->dispatch('showSweetAlert', [
             'type' => 'success',
             'title' => 'Berhasil!',

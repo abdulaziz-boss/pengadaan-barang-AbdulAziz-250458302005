@@ -8,6 +8,7 @@ use App\Models\Pengadaan;
 use App\Models\PengadaanItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
 class PengadaanIndex extends Component
@@ -23,9 +24,9 @@ class PengadaanIndex extends Component
     public $newBarang = [
         'nama' => '',
         'category_id' => '',
-        'harga_satuan' => 0,
+        'harga_satuan' => '',
         'deskripsi' => '',
-        'stok_minimal' => 0,
+        'stok_minimal' => '',
         'satuan' => 'pcs',
     ];
 
@@ -39,6 +40,14 @@ class PengadaanIndex extends Component
         $this->loadData();
         $this->addItem();
     }
+
+    public function updatedModeBarang($value)
+    {
+        if ($value === 'baru') {
+            $this->modeKategori = 'pilih';
+        }
+    }
+
 
     public function loadData()
     {
@@ -190,7 +199,7 @@ class PengadaanIndex extends Component
             DB::commit();
 
             session()->flash('success', 'Pengajuan pengadaan berhasil! Kode: ' . $kode);
-            return redirect()->route('staff.pengadaanitem.index');
+            return redirect()->route('staff.pengadaanitems.index');
         } catch (\Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());

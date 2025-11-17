@@ -40,8 +40,8 @@
                 </div>
                 {{-- ========== END MODIFIKASI ========== --}}
 
-                <table class="table table-striped" id="table1">
-                    <thead>
+                <table class="table" id="table1">
+                    <thead class="bg-primary ">
                         <tr>
                             <th>Nama Barang</th>
                             <th>Kategori</th>
@@ -90,6 +90,12 @@
             </div>
         </div>
     </section>
+    <style>
+        thead.bg-primary th {
+            color: #fff !important;
+        }
+
+    </style>
 </div>
 @push('scripts')
 <script>

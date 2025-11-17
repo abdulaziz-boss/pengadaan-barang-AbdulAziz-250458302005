@@ -27,7 +27,7 @@
                         {{-- Tabel barang --}}
                         <div class="col-12">
                             <table class="table table-bordered align-middle">
-                                <thead>
+                                <thead class="bg-primary">
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Barang</th>
@@ -98,7 +98,8 @@
                         {{-- Pilih mode barang --}}
                         <div class="col-md-6 mt-3">
                             <label>Pilih Mode Barang</label>
-                            <select wire:model="modeBarang" class="form-select">
+                            {{-- pakai .live agar reaktif langsung --}}
+                            <select wire:model.live="modeBarang" class="form-select">
                                 <option value="pilih">Pilih barang yang sudah ada</option>
                                 <option value="baru">Tambah barang baru</option>
                             </select>
@@ -207,7 +208,7 @@
                             <button type="submit" class="btn btn-primary me-2">
                                 <i class="bi bi-check-circle"></i> Ajukan Pengadaan
                             </button>
-                            <a href="{{ route('staff.pengadaanitem.index') }}" class="btn btn-danger">
+                            <a href="{{ route('staff.pengadaanitems.index') }}" class="btn btn-danger" wire:navigate>
                                 <i class="bi bi-x-circle"></i> Batal
                             </a>
                         </div>
@@ -217,7 +218,7 @@
         </div>
     </section>
 
-    <script>
+   <script>
         window.addEventListener('barang-berhasil-ditambah', event => {
             Swal.fire({
                 icon: 'success',
@@ -225,7 +226,16 @@
                 text: 'Barang baru berhasil ditambahkan!',
                 showConfirmButton: false,
                 timer: 1500
+            }).then(() => {
+                // Setelah alert selesai, redirect ke halaman pengadaan item
+                window.location.href = "{{ route('staff.pengadaanitems.index') }}";
             });
         });
     </script>
+
+    <style>
+        thead.bg-primary th {
+            color: #fff !important;
+        }
+    </style>
 </div>

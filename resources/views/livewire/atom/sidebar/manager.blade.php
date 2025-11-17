@@ -89,6 +89,13 @@
                 </a>
             </li>
 
+           <li class="sidebar-item {{ request()->routeIs('manager.pengadaans.index') ? 'active' : '' }}">
+                <a href="{{ route('manager.pengadaans.index') }}" class="sidebar-link" wire:navigate>
+                    <i class="bi bi-clock-history me-2"></i>
+                    <span>List Pengadaan</span>
+                </a>
+            </li>
+
 
         </ul>
     </div>
