@@ -58,18 +58,32 @@
                                     <td>{{ $pengadaan->tanggal_disetujui ?? '-' }}</td>
                                     <td>{{ $pengadaan->tanggal_selesai ?? '-' }}</td>
                                     <td>
-                                        {{-- Tombol Upload Bukti --}}
-                                        @if($pengadaan->status === 'disetujui')
-                                            <button wire:click="$set('showUploadModal', {{ $pengadaan->id }})" class="btn btn-success btn-sm">
-                                                Upload Bukti
-                                            </button>
-                                        @endif
+                                        <div class="d-flex gap-1">
 
-                                        {{-- Tombol Hapus --}}
-                                        <button wire:click="deletePengadaan({{ $pengadaan->id }})" class="btn btn-danger btn-sm mt-1">
-                                            Hapus
-                                        </button>
+                                            {{-- Tombol Upload Bukti --}}
+                                            @if($pengadaan->status === 'disetujui')
+                                                <button wire:click="$set('showUploadModal', {{ $pengadaan->id }})"
+                                                        class="btn btn-success btn-sm">
+                                                    <i class="bi bi-upload"></i>
+                                                </button>
+                                            @endif
+
+                                            {{-- Tombol Show Detail --}}
+                                            <a href="{{ route('staff.pengadaans.show', $pengadaan->id) }}"
+                                            class="btn btn-info btn-sm" title="Lihat Detail" wire:navigate>
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+
+                                            {{-- Tombol Hapus --}}
+                                            <button wire:click="deletePengadaan({{ $pengadaan->id }})"
+                                                    class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+
+                                        </div>
                                     </td>
+
+
                                 </tr>
                             @empty
                                 <tr>

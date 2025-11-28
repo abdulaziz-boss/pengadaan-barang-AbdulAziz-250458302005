@@ -24,7 +24,6 @@ class Login extends Component
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             session()->regenerate();
 
-            // Arahkan ke dashboard sesuai role
             $role = Auth::user()->role;
 
             return match ($role) {
@@ -35,8 +34,9 @@ class Login extends Component
             };
         }
 
-        session()->flash('error', 'Email atau password salah.');
+        $this->addError('login', 'Email atau password salah.');
     }
+
 
 
     public function render()

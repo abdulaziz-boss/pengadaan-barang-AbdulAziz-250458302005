@@ -50,16 +50,26 @@
         </thead>
 
         <tbody>
-            @foreach ($pengadaan->items as $i => $item)
-                <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td>{{ $item->barang->nama }}</td>
-                    <td>{{ $item->jumlah }}</td>
-                    <td>Rp {{ number_format($item->harga_saat_pengajuan, 0, ',', '.') }}</td>
-                    <td>Rp {{ number_format($item->total_harga_item, 0, ',', '.') }}</td>
-                </tr>
-            @endforeach
-        </tbody>
+    @foreach ($pengadaan->items as $i => $item)
+        <tr>
+            <td>{{ $i + 1 }}</td>
+            <td>{{ $item->barang->nama }}</td>
+
+            {{-- Kategori --}}
+            <td>{{ $item->barang->category->nama ?? '-' }}</td>
+
+            {{-- Qty --}}
+            <td>{{ $item->jumlah }}</td>
+
+            {{-- Harga Satuan --}}
+            <td>Rp {{ number_format($item->harga_saat_pengajuan, 0, ',', '.') }}</td>
+
+            {{-- Subtotal --}}
+            <td>Rp {{ number_format($item->total_harga_item, 0, ',', '.') }}</td>
+        </tr>
+    @endforeach
+</tbody>
+
     </table>
 
     <hr style="margin: 30px 0;">

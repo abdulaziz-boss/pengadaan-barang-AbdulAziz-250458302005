@@ -22,8 +22,8 @@ class PengadaanItem extends Model
         return $this->belongsTo(Pengadaan::class);
     }
 
-    public function barang()
+   public function barang()
     {
-        return $this->belongsTo(Barang::class);
+        return $this->belongsTo(Barang::class, 'barang_id');
     }
 }

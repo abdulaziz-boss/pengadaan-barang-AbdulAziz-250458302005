@@ -2,6 +2,23 @@
     <h3>Detail Pengadaan</h3>
     <hr>
 
+    <!-- Tombol di sebelah kanan -->
+    <div class="d-flex justify-content-end mb-3 gap-2">
+
+        <button wire:click="exportDetailPdf" class="btn btn-primary btn-sm">
+            Export PDF
+        </button>
+
+        <button wire:click="exportDetailExcel" class="btn btn-success btn-sm">
+            Export Excel
+        </button>
+
+        <a href="{{ route('admin.pengadaans.index') }}" class="btn btn-danger btn-sm" wire:navigate>
+            Kembali
+        </a>
+
+    </div>
+
     <table class="table">
         <tr>
             <th>Kode Pengadaan</th>
@@ -67,5 +84,4 @@
         </tbody>
     </table>
 
-    <a href="{{ route('admin.pengadaans.index') }}" class="btn btn-danger"wire:navigate>Kembali</a>
 </div>

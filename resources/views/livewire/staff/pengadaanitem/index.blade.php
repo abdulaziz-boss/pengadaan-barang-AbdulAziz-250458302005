@@ -240,6 +240,7 @@
 </div>
 
 {{-- Script SweetAlert untuk Livewire v3 --}}
+@push('scripts')
 <script>
 document.addEventListener('livewire:init', () => {
     // Event untuk success dengan redirect
@@ -271,3 +272,4 @@ document.addEventListener('livewire:init', () => {
     });
 });
 </script>
+@endpush

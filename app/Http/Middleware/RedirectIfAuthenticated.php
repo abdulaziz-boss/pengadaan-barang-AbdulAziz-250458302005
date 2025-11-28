@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
         if (Auth::check()) {
             // Cek role user yang sudah login
             $role = Auth::user()->role;
-
+            
             return match ($role) {
                 'admin' => redirect()->route('admin.dashboard'),
                 'manager' => redirect()->route('manager.dashboard'),
