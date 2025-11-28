@@ -2,8 +2,12 @@
     <div class="row h-100">
         <div class="col-lg-5 col-12">
             <div id="auth-left">
-                <div class="auth-logo">
-                    <a href="#"><img src="mazer/assets/compiled/svg/logo.svg" alt="Logo"></a>
+                <div class="auth-logo" style="margin-bottom: 25px; margin-top: -45px;">
+                    <a href="#">
+                        <img src="{{ asset('images/logo.png') }}"
+                            alt="Logo"
+                            style="max-width: 180px; height: auto;">
+                    </a>
                 </div>
                 <h1 class="auth-title">Log in.</h1>
                 <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>

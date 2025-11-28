@@ -20,13 +20,29 @@ class Register extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:6|confirmed',
+        'password_confirmation' => 'required|min:6',
+    ];
+
+    protected $messages = [
+        'name.required' => 'Username wajib diisi.',
+
+        'email.required' => 'Email wajib diisi.',
+        'email.email' => 'Format email tidak valid.',
+        'email.unique' => 'Email sudah terdaftar.',
+
+        'password.required' => 'Password wajib diisi.',
+        'password.min' => 'Password minimal 6 karakter.',
+        'password.confirmed' => 'Password dan Konfirmasi Password tidak sama.',
+
+        'password_confirmation.required' => 'Konfirmasi Password wajib diisi.',
+        'password_confirmation.min' => 'Konfirmasi Password minimal 6 karakter.',
     ];
 
     public function register()
     {
         $this->validate();
 
-        // Buat user baru dengan role default "staff"
+        // Buat user
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
@@ -34,13 +50,8 @@ class Register extends Component
             'role' => 'staff',
         ]);
 
-        // Auto-login setelah register
-        Auth::login($user);
-
-        // Arahkan ke dashboard staff
-        // Jangan auto-login, cukup arahkan ke halaman login
+        // Redirect ke login
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
-
     }
 
     public function render()
