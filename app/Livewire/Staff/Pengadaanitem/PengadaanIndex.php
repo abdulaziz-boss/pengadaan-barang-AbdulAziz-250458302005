@@ -135,11 +135,9 @@ class PengadaanIndex extends Component
         $this->reset(['newBarang', 'newCategory', 'modeKategori']);
         $this->loadData();
 
-        // Livewire v3 SweetAlert2
-        $this->dispatch('swal-success', [
-            'message' => 'Barang baru berhasil ditambahkan!',
-            'redirect' => route('staff.pengadaanitems.index')
-        ]);
+        // Session flash dengan event untuk refresh
+        session()->flash('success', 'Barang baru berhasil ditambahkan!');
+        $this->dispatch('trigger-refresh');
     }
 
     public function save()
@@ -157,7 +155,7 @@ class PengadaanIndex extends Component
         );
 
         if (empty($validItems)) {
-            $this->dispatch('swal-error', ['message' => 'Minimal satu barang valid harus ditambahkan.']);
+            session()->flash('error', 'Minimal satu barang valid harus ditambahkan.');
             return;
         }
 
@@ -186,15 +184,13 @@ class PengadaanIndex extends Component
 
             DB::commit();
 
-            // Kirim event success dengan redirect URL
-            $this->dispatch('swal-success', [
-                'message' => 'Pengajuan pengadaan berhasil! Kode: ' . $kode,
-                'redirect' => route('staff.pengadaanitems.index')
-            ]);
+            // Session flash dengan event untuk refresh
+            session()->flash('success', 'Pengajuan pengadaan berhasil! Kode: ' . $kode);
+            $this->dispatch('trigger-refresh');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            $this->dispatch('swal-error', ['message' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+            session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 

@@ -129,12 +129,6 @@
                                         Detail
                                     </a>
 
-                                    <button type="button"
-                                            wire:click="confirmDelete({{ $p->id }})"
-                                            class="badge bg-danger border-0">
-                                        Hapus
-                                    </button>
-
                                 </td>
                             </tr>
 
@@ -193,7 +187,7 @@ function confirmDeleteAdmin() {
         cancelButtonText: 'Batal'
     }).then((r) => {
         if (r.isConfirmed) {
-            Livewire.dispatch("deleteConfirmed");
+            @this.call('deleteSelected');
         }
     });
 }

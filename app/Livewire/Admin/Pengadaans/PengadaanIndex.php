@@ -42,6 +42,7 @@ class PengadaanIndex extends Component
 
     protected function baseQuery()
     {
+        // PENTING: withTrashed() agar data yang di-soft delete staff tetap muncul
         return Pengadaan::withTrashed()
             ->with(['pengaju'])
             ->when($this->search, function ($q) {
@@ -81,6 +82,7 @@ class PengadaanIndex extends Component
         $this->selectAll = true;
         $this->selectPage = true;
 
+        // Include soft deleted records
         $ids = Pengadaan::withTrashed()->pluck('id')->toArray();
 
         $this->selected = [];
@@ -101,18 +103,37 @@ class PengadaanIndex extends Component
         $ids = array_keys(array_filter($this->selected));
 
         if (empty($ids)) {
-            session()->flash('error', 'Tidak ada data yang dipilih.');
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'Tidak ada data yang dipilih.'
+            ]);
             return;
         }
 
-        Pengadaan::whereIn('id', $ids)->delete();
+        try {
+            // HARD DELETE untuk admin (bukan soft delete)
+            // forceDelete() akan menghapus permanen bahkan yang sudah soft deleted
+            $deleted = Pengadaan::withTrashed()
+                ->whereIn('id', $ids)
+                ->forceDelete();
 
-        $this->selected = [];
-        $this->selectPage = false;
-        $this->selectAll = false;
+            $this->selected = [];
+            $this->selectPage = false;
+            $this->selectAll = false;
 
-        session()->flash('success', 'Data terpilih berhasil dihapus.');
-        $this->resetPage();
+            $this->dispatch('alert', [
+                'type' => 'success',
+                'message' => "$deleted data berhasil dihapus permanen."
+            ]);
+
+            $this->resetPage();
+
+        } catch (\Exception $e) {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'Gagal menghapus data: ' . $e->getMessage()
+            ]);
+        }
     }
 
     // EXPORT EXCEL

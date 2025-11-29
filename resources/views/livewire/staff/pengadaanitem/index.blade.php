@@ -8,12 +8,21 @@
             </div>
 
             <div class="card-body">
-                {{-- Pesan sukses / error --}}
+                {{-- Pesan sukses / error dengan auto-hide --}}
                 @if (session()->has('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="flash-message">
+                        <i class="bi bi-check-circle me-2"></i>
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
                 @endif
+
                 @if (session()->has('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="flash-message">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
                 @endif
 
                 {{-- Form utama --}}
@@ -99,7 +108,6 @@
                         {{-- Pilih mode barang --}}
                         <div class="col-md-6 mt-3">
                             <label>Pilih Mode Barang</label>
-                            {{-- pakai .live agar reaktif langsung --}}
                             <select wire:model.live="modeBarang" class="form-select">
                                 <option value="pilih">Pilih barang yang sudah ada</option>
                                 <option value="baru">Tambah barang baru</option>
@@ -236,39 +244,49 @@
         .form-control:focus {
             box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
         }
+
+        /* Animasi fade out untuk flash message */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .alert.fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
     </style>
 </div>
 
-{{-- Script SweetAlert untuk Livewire v3 --}}
+{{-- Script untuk auto-hide dan refresh --}}
 @push('scripts')
 <script>
 document.addEventListener('livewire:init', () => {
-    // Event untuk success dengan redirect
-    Livewire.on('swal-success', (event) => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: event.message,
-            timer: 2000,
-            showConfirmButton: false,
-            timerProgressBar: true,
-            willClose: () => {
-                // Redirect setelah SweetAlert ditutup
-                window.location.href = event.redirect || '{{ route("staff.pengadaanitems.index") }}';
-            }
-        });
-    });
+    // Function untuk handle flash message
+    function handleFlashMessage() {
+        const flashMessage = document.getElementById('flash-message');
 
-    // Event untuk error
-    Livewire.on('swal-error', (event) => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Gagal!',
-            text: event.message,
-            timer: 2000,
-            showConfirmButton: false,
-            timerProgressBar: true
-        });
+        if (flashMessage) {
+            // Setelah 1.5 detik, tambahkan animasi fade out
+            setTimeout(() => {
+                flashMessage.classList.add('fade-out');
+
+                // Setelah animasi selesai (0.5 detik), refresh halaman
+                setTimeout(() => {
+                    window.location.href = '{{ route("staff.pengadaanitems.index") }}';
+                }, 500);
+            }, 1500);
+        }
+    }
+
+    // Jalankan saat halaman load
+    handleFlashMessage();
+
+    // Listen ke event trigger-refresh dari Livewire
+    Livewire.on('trigger-refresh', () => {
+        // Tunggu sebentar agar session flash ter-render dulu
+        setTimeout(() => {
+            handleFlashMessage();
+        }, 100);
     });
 });
 </script>

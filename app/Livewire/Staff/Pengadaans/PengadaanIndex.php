@@ -65,31 +65,59 @@ class PengadaanIndex extends Component
             message: 'Bukti pengadaan berhasil diupload!',
         );
 
-
         // Reset modal dan input file
         unset($this->bukti[$pengadaanId]);
         $this->showUploadModal = 0;
     }
 
     // ====================================
-    // Hapus Pengadaan + file bukti
+    // Hapus Pengadaan (Soft Delete dengan Logic)
     // ====================================
     public function deletePengadaan($pengadaanId)
     {
         $pengadaan = Pengadaan::find($pengadaanId);
+
         if (!$pengadaan) {
             session()->flash('error', 'Pengadaan tidak ditemukan.');
             return;
         }
 
-        // Hapus file bukti jika ada
-        if ($pengadaan->bukti_pembelian && Storage::disk('public')->exists($pengadaan->bukti_pembelian)) {
-            Storage::disk('public')->delete($pengadaan->bukti_pembelian);
+        // Cek kepemilikan data
+        if ($pengadaan->pengaju_id !== Auth::id()) {
+            session()->flash('error', 'Anda tidak memiliki akses untuk menghapus pengadaan ini.');
+            return;
         }
 
-        $pengadaan->delete();
+        try {
+            // LOGIKA KHUSUS BERDASARKAN STATUS
+            if ($pengadaan->status === 'diproses') {
+                // Jika status "diproses" → ubah status menjadi "ditolak"
+                $pengadaan->status = 'ditolak';
+                $pengadaan->alasan_penolakan = 'Pengadaan dibatalkan oleh staff';
+                $pengadaan->save();
 
-        session()->flash('success', 'Pengadaan dan bukti berhasil dihapus.');
+                // Kemudian soft delete
+                $pengadaan->delete();
+
+                session()->flash('success', 'Pengadaan dibatalkan dan status diubah menjadi ditolak.');
+
+            } elseif (in_array($pengadaan->status, ['disetujui', 'ditolak', 'selesai'])) {
+                // Jika status "disetujui", "ditolak", atau "selesai"
+                // → soft delete tanpa mengubah status
+
+                $pengadaan->delete();
+
+                session()->flash('success', 'Pengadaan berhasil dihapus. Status tetap dipertahankan untuk arsip admin.');
+
+            } else {
+                // Status lainnya, soft delete biasa
+                $pengadaan->delete();
+                session()->flash('success', 'Pengadaan berhasil dihapus.');
+            }
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Gagal menghapus pengadaan: ' . $e->getMessage());
+        }
     }
 
     // ====================================
@@ -97,7 +125,10 @@ class PengadaanIndex extends Component
     // ====================================
     public function render()
     {
-        $pengadaans = Pengadaan::with('pengaju')
+        // HANYA tampilkan data yang BELUM di-soft delete
+        // Staff tidak bisa lihat data yang sudah dihapus
+        $pengadaans = Pengadaan::query() // Tanpa withTrashed()
+            ->with('pengaju')
             ->where('pengaju_id', Auth::id())
             ->where(function ($query) {
                 $query->where('kode_pengadaan', 'like', "%{$this->search}%")
