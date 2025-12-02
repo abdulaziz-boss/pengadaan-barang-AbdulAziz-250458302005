@@ -88,6 +88,11 @@ php artisan migrate
 php artisan storage:link
 ```
 
+### 8. Jalankan Seeder
+```bash
+php artisan db:seed --class=UserSeeder
+```
+
 ---
 
 ## ▶️ **Cara Menjalankan Project**
