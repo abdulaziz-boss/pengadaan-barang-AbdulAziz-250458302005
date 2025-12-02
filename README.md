@@ -1,66 +1,163 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🛒 Project Pengadaan Barang – Laravel & Livewire
+<p align="center"> <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300"> </p> <h2 align="center">Sistem Pengadaan Barang • Laravel 12 + Livewire 3</h2>
+📘 Deskripsi Singkat
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Pengadaan Barang ini merupakan aplikasi manajemen proses pengadaan berbasis Laravel dan Livewire.
+Aplikasi ini dirancang untuk mendukung alur kerja pengajuan barang oleh staff, verifikasi oleh manager, hingga pengelolaan data secara menyeluruh oleh admin.
 
-## About Laravel
+Sistem dilengkapi antarmuka modern, validasi real-time, serta notifikasi interaktif untuk meningkatkan efisiensi dan ketepatan proses pengadaan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🛠 Teknologi yang Digunakan
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Laravel 12
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Livewire 3
 
-## Learning Laravel
+Blade Template
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Bootstrap
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+MySQL / MariaDB
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+SweetAlert2
 
-## Laravel Sponsors
+⭐ Fitur Utama
+🔐 1. Sistem Autentikasi Terintegrasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Login & register
 
-### Premium Partners
+Pembagian role otomatis: Admin, Manager, Staff
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Proteksi akses halaman
 
-## Contributing
+👤 2. Modul Pengelolaan Profil Pengguna
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Edit profil
 
-## Code of Conduct
+Upload foto profil
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Validasi real-time
 
-## Security Vulnerabilities
+📦 3. Sistem Manajemen Inventaris
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+CRUD data barang
 
-## License
+CRUD kategori barang
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Tabel dengan pencarian & filter
+
+📝 4. Modul Pengajuan Pengadaan Barang (Staff)
+
+Pengajuan resmi pengadaan barang
+
+Form dinamis Livewire
+
+Tambah beberapa item sekaligus
+
+📋 5. Fitur Multi-Item Request
+
+Input banyak item dalam satu pengajuan
+
+Tanpa reload halaman
+
+✔️ 6. Workspace Verifikasi Pengadaan (Manager)
+
+Peninjauan pengajuan
+
+Persetujuan atau penolakan
+
+Pemberian catatan verifikasi
+
+🔄 7. Pemantauan Status Pengadaan
+
+Tracking status: Pending, Completed, Approved, Rejected
+
+Riwayat status per pengajuan
+
+🗂 8. Pusat Kontrol Administrator
+
+Pengelolaan data user, barang, kategori, dan pengadaan
+
+Manajemen alur proses pengadaan
+
+📤 9. Sistem Unggah Dokumen
+
+Upload bukti pengadaan
+
+Upload lampiran pendukung
+
+Penyimpanan file aman
+
+⚡ 10. Validasi Real-Time Berbasis Livewire
+
+Validasi saat mengetik
+
+Error ditampilkan langsung
+
+🎨 11. Notifikasi Interaktif
+
+SweetAlert2 untuk notifikasi sukses, gagal, dan konfirmasi
+
+📊 12. Dashboard Berbasis Role
+
+Dashboard Staff → buat pengajuan
+
+Dashboard Manager → verifikasi pengajuan
+
+Dashboard Admin → kelola seluruh data
+
+
+⚙️ Cara Instalasi
+
+Clone Repository
+
+git clone https://github.com/username/nama-project.git
+cd nama-project
+
+
+Install Dependency
+
+composer install
+
+
+Copy File Environment
+
+cp .env.example .env
+
+
+Generate Key
+
+php artisan key:generate
+
+
+Atur Database di .env
+
+DB_DATABASE=pengadaan-barang
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+Migrate Database
+
+php artisan migrate
+
+
+Link Storage
+
+php artisan storage:link
+
+▶️ Cara Menjalankan Project
+
+Jalankan Server Laravel
+
+php artisan serve
+
+
+Buka Browser
+
+http://localhost:8000
+
+📄 Lisensi
+
+Proyek ini dibuat untuk kebutuhan pembelajaran dan pengembangan internal.
+Bisa dimodifikasi sesuai kebutuhan.
