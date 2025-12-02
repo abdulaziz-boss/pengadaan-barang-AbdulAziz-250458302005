@@ -83,16 +83,15 @@ DB_PASSWORD=
 php artisan migrate
 ```
 
-### 7. Link storage
-```bash
-php artisan storage:link
-```
-
-### 8. Jalankan Seeder
+### 7. Jalankan Seeder
 ```bash
 php artisan db:seed --class=UserSeeder
 ```
 
+### 8. Link storage
+```bash
+php artisan storage:link
+```
 ---
 
 ## ▶️ **Cara Menjalankan Project**
