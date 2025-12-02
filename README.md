@@ -1,163 +1,103 @@
-🛒 Project Pengadaan Barang – Laravel & Livewire
-<p align="center"> <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300"> </p> <h2 align="center">Sistem Pengadaan Barang • Laravel 12 + Livewire 3</h2>
-📘 Deskripsi Singkat
+<p align="center">
+  <a href="#" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300">
+  </a>
+</p>
 
-Sistem Pengadaan Barang ini merupakan aplikasi manajemen proses pengadaan berbasis Laravel dan Livewire.
-Aplikasi ini dirancang untuk mendukung alur kerja pengajuan barang oleh staff, verifikasi oleh manager, hingga pengelolaan data secara menyeluruh oleh admin.
+<h2 align="center">Laravel Pengadaan Barang</h2>
 
-Sistem dilengkapi antarmuka modern, validasi real-time, serta notifikasi interaktif untuk meningkatkan efisiensi dan ketepatan proses pengadaan.
+<p align="center">
+Sistem manajemen pengadaan barang modern berbasis <strong>Laravel</strong> dan <strong>Livewire</strong>, dilengkapi dengan alur pengajuan, verifikasi, dan kontrol admin.
+</p>
 
-🛠 Teknologi yang Digunakan
+---
 
-Laravel 12
+## **Deskripsi Singkat**
 
-Livewire 3
+Aplikasi ini merupakan sistem pengelolaan proses pengadaan barang berbasis **Laravel + Livewire**.  
+Fitur inti meliputi autentikasi role, pengajuan pengadaan barang oleh staff, verifikasi oleh manager, manajemen data oleh admin, serta upload dokumen pendukung.
 
-Blade Template
+Aplikasi dirancang dengan UI modern, validasi real-time, dan notifikasi interaktif menggunakan **SweetAlert2** untuk memberikan pengalaman pengguna yang lebih responsif.
 
-Bootstrap
+---
 
-MySQL / MariaDB
+## **Fitur Utama**
 
-SweetAlert2
+- **Authentication System (Role: Admin, Manager, Staff)**
+- **Edit Profile + Upload Foto**
+- **Manajemen Barang & Kategori**
+- **Pengajuan Pengadaan Barang (Staff)**
+- **Verifikasi Pengadaan (Manager)**
+- **Status Pengadaan (Pending, Review, Approved, Rejected)**
+- **Livewire Real-Time Validation**
+- **UI Interaktif dengan SweetAlert2**
+- **Upload File (Foto Profil, Lampiran, Bukti Pengadaan)**
+- **Notifikasi Toast Success**
+- **Dashboard Berbasis Role**
 
-⭐ Fitur Utama
-🔐 1. Sistem Autentikasi Terintegrasi
+---
 
-Login & register
+## 🛠 **Teknologi yang Digunakan**
 
-Pembagian role otomatis: Admin, Manager, Staff
+- **Laravel 12**
+- **Livewire v3**
+- **MySQL / MariaDB**
+- **Blade Template**
+- **SweetAlert2**
+- **Bootstrap**
 
-Proteksi akses halaman
+---
 
-👤 2. Modul Pengelolaan Profil Pengguna
+## ⚙️ **Cara Instalasi Project**
 
-Edit profil
-
-Upload foto profil
-
-Validasi real-time
-
-📦 3. Sistem Manajemen Inventaris
-
-CRUD data barang
-
-CRUD kategori barang
-
-Tabel dengan pencarian & filter
-
-📝 4. Modul Pengajuan Pengadaan Barang (Staff)
-
-Pengajuan resmi pengadaan barang
-
-Form dinamis Livewire
-
-Tambah beberapa item sekaligus
-
-📋 5. Fitur Multi-Item Request
-
-Input banyak item dalam satu pengajuan
-
-Tanpa reload halaman
-
-✔️ 6. Workspace Verifikasi Pengadaan (Manager)
-
-Peninjauan pengajuan
-
-Persetujuan atau penolakan
-
-Pemberian catatan verifikasi
-
-🔄 7. Pemantauan Status Pengadaan
-
-Tracking status: Pending, Completed, Approved, Rejected
-
-Riwayat status per pengajuan
-
-🗂 8. Pusat Kontrol Administrator
-
-Pengelolaan data user, barang, kategori, dan pengadaan
-
-Manajemen alur proses pengadaan
-
-📤 9. Sistem Unggah Dokumen
-
-Upload bukti pengadaan
-
-Upload lampiran pendukung
-
-Penyimpanan file aman
-
-⚡ 10. Validasi Real-Time Berbasis Livewire
-
-Validasi saat mengetik
-
-Error ditampilkan langsung
-
-🎨 11. Notifikasi Interaktif
-
-SweetAlert2 untuk notifikasi sukses, gagal, dan konfirmasi
-
-📊 12. Dashboard Berbasis Role
-
-Dashboard Staff → buat pengajuan
-
-Dashboard Manager → verifikasi pengajuan
-
-Dashboard Admin → kelola seluruh data
-
-
-⚙️ Cara Instalasi
-
-Clone Repository
-
+### 1. Clone repository
+```bash
 git clone https://github.com/username/nama-project.git
 cd nama-project
+```
 
-
-Install Dependency
-
+### 2. Install dependencies
+```bash
 composer install
+```
 
-
-Copy File Environment
-
+### 3. Copy file environment
+```bash
 cp .env.example .env
+```
 
-
-Generate Key
-
+### 4. Generate key
+```bash
 php artisan key:generate
+```
 
-
-Atur Database di .env
-
-DB_DATABASE=pengadaan-barang
+### 5. Atur konfigurasi database di file .env
+```
+DB_DATABASE=pengadaan_barang
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
-
-Migrate Database
-
+### 6. Jalankan migrasi
+```bash
 php artisan migrate
+```
 
-
-Link Storage
-
+### 7. Link storage
+```bash
 php artisan storage:link
+```
 
-▶️ Cara Menjalankan Project
+---
 
-Jalankan Server Laravel
+## ▶️ **Cara Menjalankan Project**
 
+### Jalankan server Laravel
+```bash
 php artisan serve
+```
 
-
-Buka Browser
-
+### Buka di browser
+```
 http://localhost:8000
-
-📄 Lisensi
-
-Proyek ini dibuat untuk kebutuhan pembelajaran dan pengembangan internal.
-Bisa dimodifikasi sesuai kebutuhan.
+```
